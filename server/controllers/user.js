@@ -1,40 +1,29 @@
+const { updateOne } = require("../models/User");
 const User = require("../models/User");
-const bcrypt = require("bcrypt");
 
-//REGISTER
-const registerUser = async (req, res) => {
-  const { username, password, email } = req.body;
+//update user
+const updateUser = async (req, res) => {
+  const { id } = req.params;
   try {
-    //password generating
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    //new registerd user
-    const user = new User({
-      username,
-      email,
-      password: hashedPassword,
+    const user = await User.findByIdAndUpdate(id, {
+      $set: req.body,
     });
-    await user.save();
-    res.status(200).send(user);
-  } catch (err) {
-    res.status(400).send(err.message);
+    res.status(200).send("user has been updated");
+  } catch (error) {
+    res.status(400).send(error.message);
   }
 };
 
-// LOGIN
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+//get user
+const getUser = async (req, res) => {
+  const { id } = req.params;
   try {
-    const user = await User.findOne({ email });
-    !user && res.status(400).send("user not found");
-    const validPassword = await bcrypt.compare(password, user.password);
-    !validPassword && res.status(400).send("wrong password or email");
-
-    res.status(200).send(user);
-  } catch (err) {
-    console.log(err);
-    res.status(500).send(err);
+    const user = await User.findById(id);
+    const {password, ...rest} = user._doc;
+    res.status(200).send(rest);
+  } catch (error) {
+    res.status(400).send(error.message);
   }
 };
 
-module.exports = { registerUser, loginUser };
+module.exports = { updateUser ,getUser };
