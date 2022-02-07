@@ -1,12 +1,6 @@
-
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      HELLO WORLD
-    </div>
-  );
-}
+import Home from "./pages/Home/Home";
+const App = () => {
+  return <Home />;
+};
 
 export default App;
