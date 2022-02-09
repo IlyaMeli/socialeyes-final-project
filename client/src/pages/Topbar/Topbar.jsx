@@ -1,11 +1,16 @@
 import "./topbar.css";
 import SearchIcon from "@mui/icons-material/Search";
+import { Link } from "react-router-dom";
+
 
 const Topbar = () => {
   return (
     <div className="topbar-container">
       <div className="topbar-left">
+        <Link to="/">
         <span className="logo">SocialEyes👀</span>
+        
+        </Link>
       </div>
       <div className="topbar-center">
         <div className="topbar-seachbar">
