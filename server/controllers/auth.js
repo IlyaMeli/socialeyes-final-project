@@ -27,7 +27,12 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
     });
     await user.save();
-    res.status(200).send(user);
+    // res.status(200).send(user);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    res.json({
+      user,
+      token,
+    });
   } catch (err) {
     res.status(400).send(err.message);
   }
@@ -38,21 +43,20 @@ const loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ email });
-    !user && res.status(400).send("user not found");
+    !user && res.status(400).send("User not found");
     const validPassword = await bcrypt.compare(password, user.password);
     !validPassword && res.status(400).send("Invalid Credentials");
-
     // creating out json web token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.json({
-      token,
       user,
+      token,
     });
 
     // res.status(200).send(user);
   } catch (err) {
     console.log(err);
-    res.status(500).send(err);
+    res.status(500).send(err.message);
   }
 };
 

@@ -1,4 +1,5 @@
 import "./register.css";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
@@ -6,7 +7,11 @@ const Register = () => {
       <div className="login-wrapper">
         <div className="login-left">
           <div className="login-logo">
-            <img className="login-logo-img" src="/assets/images/eyes.png" />
+            <img
+              className="login-logo-img"
+              src="/assets/images/eyes.png"
+              alt="login-logo"
+            />
             <h3 className="login-logo-title">SocialEyes</h3>
           </div>
           <span className="login-desc">
@@ -19,8 +24,9 @@ const Register = () => {
             <input placeholder="Email" className="login-input" />
             <input placeholder="Password" className="login-input" />
             <button className="login-btn">Sign-Up</button>
-            <button className="login-register">Login</button>
-
+            <Link to="login">
+              <button className="login-register">Login</button>
+            </Link>
           </div>
         </div>
       </div>
