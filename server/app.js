@@ -9,6 +9,7 @@ const postRoute = require("./routes/posts");
 // middleware
 app.use(express.json());
 app.use(cors());
+app.use("/uploads", express.static("uploads"));
 
 //routes
 app.use("/api/users", userRoute);

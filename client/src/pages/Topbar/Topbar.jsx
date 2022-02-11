@@ -9,7 +9,6 @@ const Topbar = () => {
   const {
     userData: { user },
   } = appContext;
-  // console.log("from topbar", user);
 
   return (
     <div className="topbar-container">
@@ -29,7 +28,7 @@ const Topbar = () => {
           <div className="preson-container">
             <span className="topbar-person-name">{user.username}</span>
             <img
-              src="/assets/images/profile-demo.jpg"
+              src={user.profilePicture}
               alt="profile-img"
               className="topbar-img"
             />

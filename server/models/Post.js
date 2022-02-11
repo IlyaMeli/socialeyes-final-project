@@ -12,14 +12,15 @@ const PostSchema = new mongoose.Schema(
     },
     profilePicture: {
       type: String,
-      required: true,
+      // required: true,
     },
     content: {
       type: String,
       max: 500,
     },
-    img: {
+    image: {
       type: String,
+      default: "",
     },
     likes: {
       type: Array,

@@ -2,6 +2,7 @@ import "./share.css";
 import { useContext, useState } from "react";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import AppContext from "../AppContext/AppContext";
+import axios from "axios";
 import { CircularProgress } from "@material-ui/core";
 import myApi from "../../api/Api";
 
@@ -9,6 +10,7 @@ const Share = () => {
   const [userContent, setUserContent] = useState("");
   const [inputData, setInputData] = useState("");
   const [loading, setloading] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
   // const [postData, setPostData] = useState("");
 
   const appContext = useContext(AppContext);
@@ -19,14 +21,40 @@ const Share = () => {
 
   const handlePost = async () => {
     setloading(true);
-    const { data } = await myApi.post("/posts", {
+
+    const newPost = {
       userId: user._id,
       profilePicture: user.profilePicture,
       username: user.username,
       content: inputData,
-    });
+    };
+
+    if (selectedFile) {
+      const fd = new FormData();
+      fd.append("image", selectedFile);
+      fd.append("originalname", selectedFile.filename);
+      newPost.image = selectedFile.filename;
+      console.log(selectedFile.name);
+      try {
+        await axios.post("localhost:5000/uploads/", selectedFile.filename);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    const { data } = await myApi.post("/posts", newPost);
+    // const { data } = await myApi.post("/posts", {
+    //   userId: user._id,
+    //   profilePicture: user.profilePicture,
+    //   username: user.username,
+    //   content: inputData,
+    //   image: selectedFile,
+    // });
+    console.log("CHECK", data);
     setPostData(data);
     setloading(false);
+  };
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
   return (
@@ -51,6 +79,7 @@ const Share = () => {
             <div className="share-option">
               <UploadFileIcon htmlColor="gold" className="share-icon" />
               <span className="share-option-text">Photo</span>
+              <input type="file" onChange={changeHandler} />
             </div>
           </div>
           <button className="share-btn" onClick={handlePost}>

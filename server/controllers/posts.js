@@ -2,12 +2,34 @@ const Post = require("../models/Post");
 
 //create
 const createPost = async (req, res) => {
-  const newPost = new Post(req.body);
+  console.log(req.file);
+  const { username, content, likes, userId, profilePicture } = req.body;
+  let newPost;
+  if (!req.file) {
+    newPost = new Post({
+      profilePicture,
+      username,
+      content,
+      likes,
+      userId,
+    });
+  } else {
+    const { path: image } = req.file;
+    newPost = new Post({
+      profilePicture,
+      username,
+      content,
+      likes,
+      userId,
+      image: image.replace("\\", "/"),
+    });
+  }
+  //  const newPost = new Post(req.body);
   try {
     const savedPost = await newPost.save();
     res.status(200).send(savedPost);
   } catch (error) {
-    res.status(400).send(err.message);
+    res.status(400).send(error.message);
   }
 };
 //update
@@ -78,4 +100,11 @@ const getAllPosts = async (req, res) => {
   }
 };
 
-module.exports = { createPost, updatePosts, deletePost, likePost, getPost ,getAllPosts};
+module.exports = {
+  createPost,
+  updatePosts,
+  deletePost,
+  likePost,
+  getPost,
+  getAllPosts,
+};

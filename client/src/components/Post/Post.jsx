@@ -1,7 +1,7 @@
 import "./post.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-const Post = ({ username, profilePicture, content, likes }) => {
+const Post = ({ username, profilePicture, content, likes, image }) => {
   return (
     <div className="post-container">
       <div className="post-content-wrapper">
@@ -17,11 +17,15 @@ const Post = ({ username, profilePicture, content, likes }) => {
         </div>
         <div className="post-center">
           <span className="post-content">{content}</span>
-          <img
-            className="post-content-img"
-            src="/assets/images/flowers.jpg"
-            alt="flower"
-          />
+          {image ? (
+            <img
+              className="post-content-img"
+              src={`http://localhost:5000/${image}`}
+              alt="flower"
+            />
+          ) : (
+            <div>...</div>
+          )}
         </div>
         <div className="post-bottom">
           <div className="post-bottom-left">

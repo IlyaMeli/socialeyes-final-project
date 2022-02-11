@@ -9,14 +9,13 @@ const Rightbar = ({ profile }) => {
 
     const createProfiles = () => {
       return usersData.map((user) => (
-        <div className="rightbar-friends-profile">
+        <div key={user._id} className="rightbar-friends-profile">
           <span className="rightbar-friends-profile-text">{user.username}</span>
           <img
             className="rightbar-profile"
             src={user.profilePicture}
             alt="profile"
           />
-          {console.log(usersData)}
         </div>
       ));
     };

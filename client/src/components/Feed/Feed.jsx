@@ -21,6 +21,7 @@ const Feed = () => {
         profilePicture={post.profilePicture}
         content={post.content}
         likes={post.likes.length}
+        image={post.image}
       />
     ));
   };
