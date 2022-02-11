@@ -33,3 +33,22 @@
 .rightbar-friends-profile:hover {
   background-color: var(--third-color);
 }
+.right-bar-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  background-color: var(--third-color);
+  padding: 1rem;
+  border-radius: 8px;
+}
+.right-bar-info-item {
+  display: flex;
+  gap: 1rem;
+}
+.right-bar-info-key {
+  font-weight: 500;
+}
+.right-bar-info-value {
+  font-weight: 300;
+}

@@ -46,14 +46,20 @@ const loginUser = async (req, res) => {
     !user && res.status(400).send("User not found");
     const validPassword = await bcrypt.compare(password, user.password);
     !validPassword && res.status(400).send("Invalid Credentials");
+
     // creating out json web token
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    console.log(user);
     res.json({
-      user,
+      user: {
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        profilePicture: user.profilePicture,
+        themePicture: user.themePicture,
+      },
       token,
     });
-
-    // res.status(200).send(user);
   } catch (err) {
     console.log(err);
     res.status(500).send(err.message);

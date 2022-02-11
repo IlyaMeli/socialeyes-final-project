@@ -1,4 +1,5 @@
 import "./sidebar.css";
+import { Link } from "react-router-dom";
 import RssFeedIcon from "@mui/icons-material/RssFeed";
 import ChatIcon from "@mui/icons-material/Chat";
 import PeopleIcon from "@mui/icons-material/People";
@@ -9,15 +10,17 @@ const Sidebar = () => {
       <div className="sidebar-content-wrapper">
         <ul className="sidebar-ul">
           <li className="sidebar-li">
-            <RssFeedIcon className="sidebar-icon"/>
-            <span className="sidebar-li-text">Feed</span>
+            <RssFeedIcon className="sidebar-icon" />
+            <Link className="sidebar-link" to="/">
+              <span className="sidebar-li-text">Feed</span>
+            </Link>
           </li>
           <li className="sidebar-li">
-            <ChatIcon className="sidebar-icon"/>
+            <ChatIcon className="sidebar-icon" />
             <span className="sidebar-li-text">Chat</span>
           </li>
           <li className="sidebar-li">
-            <PeopleIcon className="sidebar-icon"/>
+            <PeopleIcon className="sidebar-icon" />
             <span className="sidebar-li-text">People</span>
           </li>
         </ul>

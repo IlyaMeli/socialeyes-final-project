@@ -28,3 +28,6 @@
 .sidebar-li:hover {
   background-color: var(--third-color);
 }
+.sidebar-link {
+  width: 100%;
+}

@@ -1,7 +1,44 @@
 import "./register.css";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import myApi from "../../api/Api";
+import { Alert } from "@mui/material";
+import { CircularProgress } from "@material-ui/core";
+import { Link, Redirect } from "react-router-dom";
+import AppContext from "../../components/AppContext/AppContext";
 
 const Register = () => {
+  const appContext = useContext(AppContext);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setloading] = useState(false);
+  const [error, setError] = useState(false);
+  const [isRedirect, setRedirect] = useState(false);
+
+  const RegisterUser = async () => {
+    try {
+      setloading(true);
+      const { data } = await myApi.post("/auth/register", {
+        username,
+        email,
+        password,
+      });
+      console.log("from register", data);
+      data && localStorage.setItem("userInfo", JSON.stringify(data));
+      appContext.setUserData(data);
+      setloading(false);
+      setRedirect(true);
+    } catch (error) {
+      // console.log(error.response.data);
+      console.table(error);
+      setError(error.response.data);
+      setloading(false);
+    }
+  };
+  const submitHandler = () => {
+    RegisterUser();
+  };
+
   return (
     <div className="login">
       <div className="login-wrapper">
@@ -20,11 +57,35 @@ const Register = () => {
         </div>
         <div className="login-right">
           <div className="login-box">
-            <input placeholder="Username" className="login-input" />
-            <input placeholder="Email" className="login-input" />
-            <input placeholder="Password" className="login-input" />
-            <button className="login-btn">Sign-Up</button>
-            <Link to="login">
+            {loading && (
+              <div className="login-loading">
+                <CircularProgress color="inherit" />
+              </div>
+            )}
+            {error && <Alert severity="error">{error}</Alert>}
+            <input
+              placeholder="Username"
+              className="login-input"
+              onChange={(e) => setUsername(e.target.value)}
+              value={username}
+            />
+            <input
+              placeholder="Email"
+              className="login-input"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+            <input
+              placeholder="Password"
+              className="login-input"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+            <button className="login-btn" onClick={submitHandler}>
+              Sign-Up
+            </button>
+            {isRedirect && <Redirect to="/" />}
+            <Link to="/login">
               <button className="login-register">Login</button>
             </Link>
           </div>

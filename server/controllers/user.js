@@ -25,6 +25,15 @@ const getUser = async (req, res) => {
     res.status(400).send(error.message);
   }
 };
+//get all users
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
 
 //add friends
 const addFriend = async (req, res) => {
@@ -68,4 +77,4 @@ const removeFriend = async (req, res) => {
   }
 };
 
-module.exports = { updateUser, getUser, addFriend, removeFriend };
+module.exports = { updateUser, getUser, addFriend, removeFriend, getAllUsers };

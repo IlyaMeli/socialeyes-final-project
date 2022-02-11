@@ -1,6 +1,21 @@
 .feed-container {
   flex: 4;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
+  height: calc(100vh - 8vh);
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--secondary-color);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--third-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--light-color);
 }
 .feed-content-wrapper {
   padding: 1rem;

@@ -1,32 +1,36 @@
 import "./login.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useContext } from "react";
+import { Link, Redirect } from "react-router-dom";
 import myApi from "../../api/Api";
 import { CircularProgress } from "@material-ui/core";
 import { Alert } from "@mui/material";
+import AppContext from "../../components/AppContext/AppContext";
 
 const Login = () => {
+  const appContext = useContext(AppContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setloading] = useState(false);
   const [error, setError] = useState(false);
+  const [isRedirect, setRedirect] = useState(false);
 
   const LoginUser = async () => {
     try {
       setloading(true);
       const { data } = await myApi.post("/auth/login", { email, password });
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      console.log("from loginpage", data);
+      data && localStorage.setItem("userInfo", JSON.stringify(data));
+      appContext.setUserData(data);
       setloading(false);
-      console.log(data);
+      setRedirect(true);
     } catch (error) {
-      console.log(error.response.data);
+      // console.log(error.response.data);
       console.table(error);
       setError(error.response.data);
       setloading(false);
     }
   };
   const submitHandler = () => {
-    // console.log(email, password);
     LoginUser();
   };
 
@@ -71,6 +75,7 @@ const Login = () => {
             <button className="login-btn" onClick={submitHandler}>
               Login
             </button>
+            {isRedirect && <Redirect to="/" />}
             <Link to="/register">
               <button className="login-register">Create new account</button>
             </Link>

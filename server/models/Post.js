@@ -6,6 +6,14 @@ const PostSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    username: {
+      type: String,
+      required: true,
+    },
+    profilePicture: {
+      type: String,
+      required: true,
+    },
     content: {
       type: String,
       max: 500,

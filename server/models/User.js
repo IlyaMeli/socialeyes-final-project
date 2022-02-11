@@ -21,11 +21,13 @@ const UserSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String,
-    default: "",
+    default:
+      "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
   },
   themePicture: {
     type: String,
-    default: "",
+    default:
+      "https://www.teahub.io/photos/full/49-491298_gnome-wallpapers-4k.jpg",
   },
   friends: {
     type: Array,
