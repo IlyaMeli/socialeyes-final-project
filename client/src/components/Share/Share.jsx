@@ -2,16 +2,15 @@ import "./share.css";
 import { useContext, useState } from "react";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import AppContext from "../AppContext/AppContext";
-import axios from "axios";
-import { CircularProgress } from "@material-ui/core";
+// import axios from "axios";
+// import { CircularProgress } from "@material-ui/core";
 import myApi from "../../api/Api";
 
 const Share = () => {
-  const [userContent, setUserContent] = useState("");
+  // const [userContent, setUserContent] = useState("");
   const [inputData, setInputData] = useState("");
-  const [loading, setloading] = useState(false);
+  // const [loading, setloading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  // const [postData, setPostData] = useState("");
 
   const appContext = useContext(AppContext);
   const {
@@ -20,28 +19,33 @@ const Share = () => {
   } = appContext;
 
   const handlePost = async () => {
-    // event.preventDefault();
-    setloading(true);
-    const newPost = {
-      userId: user._id,
-      profilePicture: user.profilePicture,
-      username: user.username,
-      content: inputData,
-    };
+    // setloading(true);
+    // const newPost = {
+    //   userId: user._id,
+    //   profilePicture: user.profilePicture,
+    //   username: user.username,
+    //   content: inputData,
+    // };
 
     if (selectedFile) {
-      const fd = new FormData();
-      fd.append("image", selectedFile);
-      newPost.image = selectedFile.name;
-      console.log(selectedFile.name);
+      const formData = new FormData();
+      formData.append("image", selectedFile);
+      formData.append("userId", user._id);
+      formData.append("profilePicture", user.profilePicture);
+      formData.append("username", user.username);
+      formData.append("content", inputData);
+      // newPost.image = selectedFile.name;
+      // console.log(selectedFile.name);
       try {
-        await axios.post("http://localhost:5000/uploads", fd);
+        const { data } = await myApi.post("/posts", formData);
+        console.log("CHECK", data);
+        setPostData(data);
       } catch (err) {
         console.table(err);
         console.log(err);
       }
     }
-    const { data } = await myApi.post("/posts", newPost);
+    // const { data } = await myApi.post("/posts", newPost);
     // const { data } = await myApi.post("/posts", {
     //   userId: user._id,
     //   profilePicture: user.profilePicture,
@@ -49,9 +53,9 @@ const Share = () => {
     //   content: inputData,
     //   image: selectedFile,
     // });
-    console.log("CHECK", data);
-    setPostData(data);
-    setloading(false);
+    // console.log("CHECK", data);
+    // setPostData(data);
+    // setloading(false);
   };
 
   return (
