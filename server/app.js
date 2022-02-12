@@ -11,8 +11,8 @@ const conversationRoute = require("./routes/conversations");
 const messagesRoute = require("./routes/messages");
 
 // middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 const publicPath = path.join(__dirname, "build");
 app.use(express.static(publicPath));
 
