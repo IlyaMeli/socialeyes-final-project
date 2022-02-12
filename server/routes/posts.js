@@ -12,6 +12,7 @@ const upload = require("../middleware/upload");
 router.get("/:id", getPost);
 router.get("/", getAllPosts);
 router.post("/", upload.single("image"), createPost);
+// router.post("/", createPost);
 router.put("/:id", updatePosts);
 router.put("/:id/like", likePost);
 router.delete("/:id", deletePost);

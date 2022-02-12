@@ -1,0 +1,36 @@
+.messenger{
+    height: calc(100vh - 8vh);
+    display:flex;
+    background-color: var(--dark-color);
+    color:white;
+}
+
+.chat-menu{
+    flex:3;
+    
+}
+.chat-box{
+    flex:4;
+}
+.chat-online{
+    flex:3;
+}
+
+.chat-menu-wrapper,.chat-box-wrapper,.chat-online-wrapper{
+    padding:1rem;
+    background-color: var(--dark-color);
+    height: 100%;
+}
+
+.chat-menu-input{
+    width: 70%;
+    padding: 0.7rem 0.6rem;
+    border:none;
+    background-color: var(--dark-color);
+    border-bottom: 1px var(--light-color) solid;
+    color:white;
+    font-size: 1.2rem;
+}
+.chat-menu-input:focus{
+    outline:none;
+}

@@ -9,6 +9,7 @@ const Topbar = () => {
   const {
     userData: { user },
   } = appContext;
+  const { setSearchValue, searchValue } = appContext;
 
   return (
     <div className="topbar-container">
@@ -17,10 +18,15 @@ const Topbar = () => {
           <span className="logo">SocialEyes👀</span>
         </Link>
       </div>
+      {console.log(searchValue)}
       <div className="topbar-center">
         <div className="topbar-seachbar">
           <SearchIcon className="topbar-seach-icon" />
-          <input placeholder="Seach posts..." className="search-input" />
+          <input
+            onChange={(e) => setSearchValue(e.target.value)}
+            placeholder="Seach posts..."
+            className="search-input"
+          />
         </div>
       </div>
       <div className="topbar-right">

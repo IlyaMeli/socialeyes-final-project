@@ -8,23 +8,42 @@ import AppContext from "../AppContext/AppContext";
 
 const Feed = () => {
   const appContext = useContext(AppContext);
-  const { postData } = appContext;
-
+  const { postData, userData, searchValue } = appContext;
   const [posts, setPosts] = useState([]);
   const [loading, setloading] = useState(false);
-
+  
   const createPosts = () => {
-    return posts.map((post) => (
-      <Post
-        key={post._id}
-        username={post.username}
-        profilePicture={post.profilePicture}
-        content={post.content}
-        likes={post.likes.length}
-        image={post.image}
-      />
-    ));
+    return posts
+      .filter((post) => {
+        if (post.content.toLowerCase().includes(searchValue.toLowerCase())) {
+          return post;
+        }
+      })
+      .map((post) => (
+        <Post
+          key={post._id}
+          username={post.username}
+          profilePicture={post.profilePicture}
+          content={post.content}
+          image={post.image}
+          postId={post._id}
+          likes={post.likes.length}
+        />
+      ));
   };
+  // const createPosts = () => {
+  //   return posts.map((post) => (
+  //     <Post
+  //       key={post._id}
+  //       username={post.username}
+  //       profilePicture={post.profilePicture}
+  //       content={post.content}
+  //       image={post.image}
+  //       postId={post._id}
+  //       likes={post.likes.length}
+  //     />
+  //   ));
+  // };
 
   const getPosts = async () => {
     setloading(true);
@@ -36,7 +55,6 @@ const Feed = () => {
 
   useEffect(() => {
     getPosts();
-    console.log("check");
   }, [postData]);
 
   return (

@@ -3,6 +3,7 @@
   /* height: 30vh; */
   border-radius: 8px;
   background-color: var(--third-color);
+  position: relative;
 }
 .post-content-wrapper {
   padding: 0.5rem;
@@ -56,4 +57,55 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+.post-edit-modal{
+  position:absolute;
+  background-color: var(--secondary-color);
+  top:0;
+  left:0;
+  width:100%;height:100%;
+  border-radius: 8px;
+}
+.post-edit-title{
+  font-size: 1.2rem;
+}
+.post-edit-wrapper{
+  padding:1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:1rem;
+}
+.post-edit-input{
+  border-radius:8px;
+  border:none;
+  height:2rem;
+  padding-left: 1rem;
+}
+.post-edit-input:focus{
+  outline:none
+}
+.post-close{
+  position:absolute;
+  top:5px;
+  right:10px;
+  cursor: pointer;
+}
+.post-update-btn{
+  background-color: var(--light-color);
+  cursor: pointer;
+  border:none;
+  padding: 0.5rem  1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+.post-update-btn:hover{
+  background-color: var(--third-color);
+color:white
+}
+.post-update-btn:active{
+  transform: scale(0.9);
+  background-color: var(--third-color);
+  color:white
 }

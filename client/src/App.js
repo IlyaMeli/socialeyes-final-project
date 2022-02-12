@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
+import Messenger from "./pages/Messenger/Messenger"
 import Register from "./pages/Register/Register";
 import AppContext from "./components/AppContext/AppContext";
 import SpecialRoute from "./components/SpecialRoute/SpecialRoute";
@@ -14,6 +15,7 @@ import {
 } from "react-router-dom";
 const App = () => {
   const [postData, setPostData] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [usersData, setUsersData] = useState([]);
   const [userData, setUserData] = useState(
     JSON.parse(localStorage.getItem("userInfo"))
@@ -35,7 +37,7 @@ const App = () => {
       setUserData(lsData);
     }
   }, []);
-  const context = { userData, setUserData, postData, setPostData, usersData };
+  const context = { searchValue ,setSearchValue, userData, setUserData, postData, setPostData, usersData };
 
   console.log("from app:", userData);
   // console.log("from Local:", userFromLocalStorage);
@@ -48,6 +50,12 @@ const App = () => {
             <SpecialRoute condition={userData}>
               <Home />
               <Redirect to="/login" />
+            </SpecialRoute>
+          </Route>
+          <Route exact path="/chat">
+            <SpecialRoute condition={userData}>
+              <Messenger />
+              <Redirect to="/" />
             </SpecialRoute>
           </Route>
           <Route exact path="/login">

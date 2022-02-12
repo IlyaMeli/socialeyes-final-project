@@ -20,8 +20,8 @@ const Share = () => {
   } = appContext;
 
   const handlePost = async () => {
+    // event.preventDefault();
     setloading(true);
-
     const newPost = {
       userId: user._id,
       profilePicture: user.profilePicture,
@@ -32,12 +32,12 @@ const Share = () => {
     if (selectedFile) {
       const fd = new FormData();
       fd.append("image", selectedFile);
-      fd.append("originalname", selectedFile.filename);
-      newPost.image = selectedFile.filename;
+      newPost.image = selectedFile.name;
       console.log(selectedFile.name);
       try {
-        await axios.post("localhost:5000/uploads/", selectedFile.filename);
+        await axios.post("http://localhost:5000/uploads", fd);
       } catch (err) {
+        console.table(err);
         console.log(err);
       }
     }
@@ -52,9 +52,6 @@ const Share = () => {
     console.log("CHECK", data);
     setPostData(data);
     setloading(false);
-  };
-  const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
   };
 
   return (
@@ -76,11 +73,19 @@ const Share = () => {
         <hr className="share-hr" />
         <div className="share-content-bottom">
           <div className="share-options">
-            <div className="share-option">
+            <label htmlFor="file" className="share-option">
               <UploadFileIcon htmlColor="gold" className="share-icon" />
               <span className="share-option-text">Photo</span>
-              <input type="file" onChange={changeHandler} />
-            </div>
+              <input
+                id="file"
+                className="share-file-input"
+                accept=".png,jpeg,jpg"
+                type="file"
+                onChange={(e) => {
+                  setSelectedFile(e.target.files[0]);
+                }}
+              />
+            </label>
           </div>
           <button className="share-btn" onClick={handlePost}>
             Share

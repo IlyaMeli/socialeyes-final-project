@@ -29,6 +29,7 @@ const createPost = async (req, res) => {
     const savedPost = await newPost.save();
     res.status(200).send(savedPost);
   } catch (error) {
+    console.log(error)
     res.status(400).send(error.message);
   }
 };
@@ -37,7 +38,7 @@ const updatePosts = async (req, res) => {
   try {
     const { id } = req.params;
     const post = await Post.findById(id);
-    if (post.userid === req.body.userid) {
+    if (post.userId === req.body.userId) {
       await post.updateOne({ $set: req.body });
       res.status(200).send("the post has been updated");
     } else {

@@ -1,0 +1,14 @@
+.conversation{
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+
+.conversation-img{
+    width:3.5rem;
+    height:3.5rem;
+    border-radius:50%;
+    object-fit:cover;
+    margin-right: 1rem;
+}
