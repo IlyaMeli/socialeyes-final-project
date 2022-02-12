@@ -13,6 +13,6 @@ const addMessage = async (req, res) => {
 };
 
 //get
-const getMessage = async (req, res) => {};
+// const getMessage = async (req, res) => {};
 
 module.exports = { addMessage };
