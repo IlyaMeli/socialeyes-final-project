@@ -8,17 +8,16 @@ import AppContext from "../AppContext/AppContext";
 
 const Feed = () => {
   const appContext = useContext(AppContext);
-  const { postData, userData, searchValue } = appContext;
+  const { postData, searchValue } = appContext;
   const [posts, setPosts] = useState([]);
   const [loading, setloading] = useState(false);
-  
+
   const createPosts = () => {
     return posts
-      .filter((post) => {
-        if (post.content.toLowerCase().includes(searchValue.toLowerCase())) {
-          return post;
-        }
-      })
+      .filter(
+        (post) =>
+          post.content.toLowerCase().includes(searchValue.toLowerCase()) && post
+      )
       .map((post) => (
         <Post
           key={post._id}
