@@ -29,6 +29,8 @@ app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`listing on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`listing on port ${PORT}`);
+// });
+
+module.exports = app;

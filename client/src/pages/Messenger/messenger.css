@@ -12,6 +12,7 @@
   flex: 4;
 }
 .chat-box-wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -72,4 +73,10 @@
 }
 .chat-menu-input:focus {
   outline: none;
+}
+
+.chat-no-conversation {
+  position: absolute;
+  top: 10%;
+  font-size: 1.4rem;
 }

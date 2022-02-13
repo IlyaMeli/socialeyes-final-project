@@ -18,13 +18,13 @@ const Sidebar = () => {
           <li className="sidebar-li">
             <ChatIcon className="sidebar-icon" />
             <Link className="sidebar-link" to="/chat">
-            <span className="sidebar-li-text">Chat</span>
+              <span className="sidebar-li-text">Chat</span>
             </Link>
           </li>
-          <li className="sidebar-li">
+          {/* <li className="sidebar-li">
             <PeopleIcon className="sidebar-icon" />
             <span className="sidebar-li-text">People</span>
-          </li>
+          </li> */}
         </ul>
       </div>
     </div>

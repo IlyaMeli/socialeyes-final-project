@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Home from "./pages/Home/Home";
 import Profile from "./pages/Profile/Profile";
 import Login from "./pages/Login/Login";
-import Messenger from "./pages/Messenger/Messenger"
+import Messenger from "./pages/Messenger/Messenger";
 import Register from "./pages/Register/Register";
 import AppContext from "./components/AppContext/AppContext";
 import SpecialRoute from "./components/SpecialRoute/SpecialRoute";
@@ -24,7 +24,7 @@ const App = () => {
   const getAllUsers = async () => {
     const { data } = await myApi.get("/users");
     setUsersData(data);
-    console.log("users: ", data);
+    // console.log("users: ", data);
   };
 
   useEffect(() => {
@@ -37,9 +37,17 @@ const App = () => {
       setUserData(lsData);
     }
   }, []);
-  const context = { searchValue ,setSearchValue, userData, setUserData, postData, setPostData, usersData };
+  const context = {
+    searchValue,
+    setSearchValue,
+    userData,
+    setUserData,
+    postData,
+    setPostData,
+    usersData,
+  };
 
-  console.log("from app:", userData);
+  // console.log("from app:", userData);
   // console.log("from Local:", userFromLocalStorage);
 
   return (

@@ -1,8 +1,9 @@
 import "./message.css";
 import { useContext } from "react";
 import AppContext from "../AppContext/AppContext";
+import { format } from "timeago.js";
 
-const Message = ({ own }) => {
+const Message = ({ message, own }) => {
   const appContext = useContext(AppContext);
   const {
     userData: { user },
@@ -16,9 +17,9 @@ const Message = ({ own }) => {
           alt="profile-img"
           className="message-img"
         />
-        <p className="message-text">Text from message</p>
+        <p className="message-text">{message.text}</p>
       </div>
-      <div className="message-bottom">1 hour ago</div>
+      <div className="message-bottom">{format(message.createdAt)}</div>
     </div>
   );
 };

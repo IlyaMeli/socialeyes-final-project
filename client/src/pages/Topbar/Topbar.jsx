@@ -18,7 +18,7 @@ const Topbar = () => {
           <span className="logo">SocialEyes👀</span>
         </Link>
       </div>
-      {console.log(searchValue)}
+      {/* {console.log(searchValue)} */}
       <div className="topbar-center">
         <div className="topbar-seachbar">
           <SearchIcon className="topbar-seach-icon" />

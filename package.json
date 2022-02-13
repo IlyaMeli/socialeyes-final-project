@@ -8,7 +8,8 @@
     "mongoose": "^6.2.0",
     "multer": "^1.4.4",
     "nodemon": "^2.0.15",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "socket.io": "^4.4.1"
   },
   "name": "server",
   "version": "1.0.0",
@@ -16,6 +17,7 @@
   "scripts": {
     "start": "node server/app.js",
     "server": "nodemon server/app.js",
+    "server2": "nodemon server/index.js",
     "client": "npm run start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy": "cp -r client/build server/",

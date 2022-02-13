@@ -13,6 +13,15 @@ const addMessage = async (req, res) => {
 };
 
 //get
-// const getMessage = async (req, res) => {};
+const getMessage = async (req, res) => {
+  try {
+    const messages = await Message.find({
+      conversationId: req.params.conversationId,
+    });
+    res.status(200).send(messages);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
 
-module.exports = { addMessage };
+module.exports = { addMessage, getMessage };
